@@ -47,7 +47,3 @@ if uploaded_file is not None:
         else:
             st.write("No results found.")
 
-# Display all keywords
-st.write("All Keywords:")
-for keyword in keywords:
-    st.write(f"- {keyword}")
