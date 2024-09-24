@@ -3,13 +3,9 @@ from transformers import AutoModel, AutoTokenizer
 from PIL import Image
 import torch
 
-# Check if GPU is available and set the device accordingly
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-
-# Load the model and tokenizer with GPU configuration
 tokenizer = AutoTokenizer.from_pretrained('ucaslcl/GOT-OCR2_0', trust_remote_code=True)
-model = AutoModel.from_pretrained('ucaslcl/GOT-OCR2_0', trust_remote_code=True, low_cpu_mem_usage=True, device_map='auto', use_safetensors=True, pad_token_id=tokenizer.eos_token_id)
-model = model.eval().to(device)
+model = AutoModel.from_pretrained('ucaslcl/GOT-OCR2_0', trust_remote_code=True, low_cpu_mem_usage=True, device_map='cuda', use_safetensors=True, pad_token_id=tokenizer.eos_token_id)
+model = model.eval().cuda()
 
 # Streamlit app
 st.title("OCR with Transformers")
